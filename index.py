@@ -1,25 +1,21 @@
 from Life import *
-import random,string
+from util import *
 
-def random_name(length):
-    return ''.join(random.choices(string.ascii_letters+string.digits,k=length))
-def random_dna(length):
-    return ''.join(random.choices(string.ascii_letters+string.digits,k=length))
+lifes=[]
+dna_qx={}
 
-def compare_dna(lifep_1,lifep_2,life_c):
-    simlar_v=0
-    for i,j,k in zip(lifep_1.dna,lifep_2.dna,life_c.dna):
-        if i==j or i==k:
-            simlar_v+=1
-    return simlar_v
+for i in range(0,100):
+    Life(random_gen(64),random_gen(1024)).born(lifes)
 
-r1=Life("a",random_dna(DNA_LENGTH))
-r2=Life("b",random_dna(DNA_LENGTH))
+for k in lifes:
+    dna_qx[k.id]=count_letter(k.dna,"a")
 
-lifes=[r1,r2]
+print("生命数量："+str(len(lifes)))
+format_print_dict(dna_qx)
+print("最大值："+str(max(dna_qx.values())))
+print("最大值对应的key："+str(find_max_keys(dna_qx)))
+#清除最大值的生命
+for k in find_max_keys(dna_qx):
+    find_life_by_id(k,lifes).die(lifes)
+print("清除最大值后生命数量："+str(len(lifes)))
 
-for i in range(10):
-    r3=lifes[len(lifes)-2]+lifes[len(lifes)-1]
-    print(r3.parents[0].name,r3.parents[1].name)
-    lifes.append(r3)
-    print(compare_dna(r1,r2,r3))

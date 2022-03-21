@@ -1,7 +1,10 @@
 from .config import *
 import hashlib,time,random,string
 
-lifes=[]
+class NearLifeException(Exception):
+    pass
+
+    
 
 class Life():
     def __init__(self, name,dna,parent=None):
@@ -12,9 +15,9 @@ class Life():
         if parent!=None:
             self.parents.append(parent[0])
             self.parents.append(parent[1])
-    def born(self):
+    def born(self,lifes):
         lifes.append(self)
-    def die(self):
+    def die(self,lifes):
         lifes.remove(self)
     def __add__(self,other):
         dna=""
