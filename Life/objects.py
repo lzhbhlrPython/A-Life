@@ -35,3 +35,8 @@ class Life():
         return "Name: "+self.name+"\n"+"DNA: "+self.dna+"\n"+"ID: "+self.id
     def __eq__(self, __o: object) -> bool:
         return self.id==__o.id
+
+class Nature():
+    def __init__(self):
+        self.lifes=[]
+        self.dna_qx={}
