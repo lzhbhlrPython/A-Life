@@ -9,6 +9,9 @@ class Life():
         self.dna = dna
         self.id=hashlib.sha3_512((str(time.time())+self.dna+self.name).encode('utf-8')).hexdigest()
         self.parents=[]
+        if parent!=None:
+            self.parents.append(parent[0])
+            self.parents.append(parent[1])
     def born(self):
         lifes.append(self)
     def die(self):
